@@ -9,14 +9,14 @@ resource "aws_security_group" "main" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = var.sg-ssh-ingress-cidr
+    cidr_blocks = [var.sg-ssh-ingress-cidr]
   }
   ingress {
     description = "app"
     from_port   = 80
     to_port     = 80
     protocol    = "tcp"
-    cidr_blocks = var.sg-ingress-cidr
+    cidr_blocks = [var.sg-ingress-cidr]
   }
 
   egress {
