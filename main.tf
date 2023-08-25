@@ -68,3 +68,10 @@ resource "aws_route53_record" "main" {
   ttl     = 30
   records = [var.dns_name]
 }
+
+resource "aws_lb_target_group" "main" {
+  name     = "${local.names}-tg"
+  port     = 80
+  protocol = "HTTP"
+  vpc_id   = var.vpc_id
+}
