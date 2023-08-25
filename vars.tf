@@ -14,3 +14,4 @@ variable "max_size" {}
 variable "min_size" {}
 
 variable "subnet_ids" {}
+variable "dns_name" {}
