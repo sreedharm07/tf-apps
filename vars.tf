@@ -15,3 +15,5 @@ variable "min_size" {}
 
 variable "subnet_ids" {}
 variable "dns_name" {}
+variable "listner" {}
+variable "priority" {}
