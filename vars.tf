@@ -18,3 +18,4 @@ variable "dns_name" {}
 variable "listner" {}
 variable "priority" {}
 variable "port" {}
+variable "dns_public_name" {}
