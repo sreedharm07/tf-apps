@@ -102,9 +102,9 @@ resource "aws_lb_target_group" "public" {
 }
 
 resource "aws_lb_target_group_attachment" "public" {
-  count = length (data.dns_a_record_set.public.addrs)
+  count = length (tolist(data.dns_a_record_set.public.addrs))
   target_group_arn = aws_lb_target_group.public[0].arn
-  target_id        = element(data.dns_a_record_set.public.addrs,count.index)
+  target_id        = element(tolist(data.dns_a_record_set.public.addrs,count.index))
   port             = 80
 }
 
