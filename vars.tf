@@ -17,3 +17,4 @@ variable "subnet_ids" {}
 variable "dns_name" {}
 variable "listner" {}
 variable "priority" {}
+variable "port" {}
