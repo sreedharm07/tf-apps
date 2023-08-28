@@ -110,19 +110,19 @@ resource "aws_lb_target_group_attachment" "public" {
   availability_zone = "all"
 }
 
-#resource "aws_lb_listener_rule" "main" {
-#  count = var.components== "frontend" ? 1:0
-#  listener_arn = var.public_listner
-#  priority     = var.priority
-#
-#  action {
-#    type             = "forward"
-#    target_group_arn = aws_lb_target_group.public.arn
-#  }
-#
-#  condition {
-#    path_pattern {
-#      values =["${var.env}.cloudev7.online"]
-#    }
-#  }
-#}
+resource "aws_lb_listener_rule" "main" {
+  count = var.components== "frontend" ? 1:0
+  listener_arn = var.public_listner
+  priority     = var.priority
+
+  action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.public.arn
+  }
+
+  condition {
+    path_pattern {
+      values =["${var.env}.cloudev7.online"]
+    }
+  }
+}
