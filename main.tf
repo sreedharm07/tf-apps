@@ -103,8 +103,8 @@ resource "aws_lb_target_group" "public" {
 
 resource "aws_lb_target_group_attachment" "public" {
   count = data.dns_a_record_set.public.addrs
-  target_group_arn = aws_lb_target_group.public.arn
-  target_id        =  data.dns_a_record_set.public[0].addrs
+  target_group_arn = aws_lb_target_group.public[0].arn
+  target_id        = data.dns_a_record_set.public.addrs
   port             = 80
 }
 
