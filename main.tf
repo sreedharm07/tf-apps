@@ -64,7 +64,7 @@ resource "aws_autoscaling_group" "main" {
 
 resource "aws_route53_record" "main" {
   zone_id = "Z09444252M01QG3Q8GZAK"
-  name    = components == "frontend" ? var.env : "${var.components}-${var.env}"
+  name    = component == "frontend" ? var.env : "${var.components}-${var.env}"
   type    = "CNAME"
   ttl     = 30
   records = [components == "frontend" ? var.dns_public_name : var.dns_name]
