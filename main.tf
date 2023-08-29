@@ -75,7 +75,7 @@ resource "aws_route53_record" "main" {
 
 resource "aws_lb_target_group" "main" {
   name     = "${local.names}-tg"
-  port     = 80
+  port     = var.port
   protocol = "HTTP"
   vpc_id   = var.vpc_id
 }
