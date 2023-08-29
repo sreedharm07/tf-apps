@@ -1,3 +1,3 @@
-output "ips" {
-  value = data.dns_a_record_set.public
-}
+#output "ips" {
+#  value = data.dns_a_record_set.public
+#}

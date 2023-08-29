@@ -104,10 +104,10 @@ resource "aws_lb_target_group" "public" {
 }
 
 resource "aws_lb_target_group_attachment" "public" {
-  count = var.components == "frontend" ? length(var.subnet_ids) : 0
-  target_group_arn = aws_lb_target_group.public[0].arn
-  target_id        = element(tolist(data.dns_a_record_set.public.addrs),count.index)
-  port             = 80
+  count             = var.components == "frontend" ? length(var.subnet_ids) : 0
+  target_group_arn  = aws_lb_target_group.public[0].arn
+  target_id         = element(tolist(data.dns_a_record_set.public.addrs), count.index)
+  port              = 80
   availability_zone = "all"
 }
 
@@ -122,7 +122,7 @@ resource "aws_lb_listener_rule" "public" {
   }
 
   condition {
-    path_pattern {
+    host_header{
       values =["${var.env}.cloudev7.online"]
     }
   }
