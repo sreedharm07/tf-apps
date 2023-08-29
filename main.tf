@@ -34,6 +34,7 @@ resource "aws_launch_template" "main" {
   instance_type          = var.instance_type
   vpc_security_group_ids = [aws_security_group.main.id]
   user_data              = base64encode(templatefile("${path.module}/userdata.sh",
+    aws_iam_instance_profile{ name ="${local.names}-role" }
     {
       component = var.components
       env       = var.env
@@ -129,7 +130,7 @@ resource "aws_lb_listener_rule" "public" {
   }
 }
 
-resource "aws_iam_role" "role" {
+resource "aws_iam_role" "main" {
   name = "${local.names}-role"
 
   assume_role_policy = jsonencode({
@@ -176,4 +177,14 @@ resource "aws_iam_policy" "main" {
       }
     ]
   })
+}
+
+resource "aws_iam_role_policy_attachment" "test-attach" {
+  role       = aws_iam_role.main.name
+  policy_arn = aws_iam_policy.main.arn
+}
+
+resource "aws_iam_instance_profile" "main" {
+  name = "${local.names}-role"
+  role = aws_iam_role.main.name
 }
