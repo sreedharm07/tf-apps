@@ -88,7 +88,7 @@ resource "aws_lb_listener_rule" "main" {
   }
 
   condition {
-    path_pattern {
+    host_header {
       values =[var.components == "frontend" ? "${var.env}.cloudev7.online": "${var.components}-${var.env}.cloudev7.online" ]
     }
   }
