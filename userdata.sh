@@ -1,7 +1,7 @@
 #!/bin/bash
 
 yum install ansible python3.11-pip.noarch -y &>>/opt/userdata.log
-sudo pip3.11 install boto3 botocore -y &>>/opt/userdata.log
+sudo pip3.11 install boto3 botocore &>>/opt/userdata.log
 
 wget https://truststore.pki.rds.amazonaws.com/global/global-bundle.pem &>>/opt/userdata.log
 
