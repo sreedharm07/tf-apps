@@ -104,7 +104,7 @@ resource "aws_lb_target_group" "public" {
 }
 
 resource "aws_lb_target_group_attachment" "public" {
-  count = var.components == "frontend" ? length(tolist(data.dns_a_record_set.public.addrs)) : 0
+  count = var.components == "frontend" ? length(var.subnet_ids) : 0
   target_group_arn = aws_lb_target_group.public[0].arn
   target_id        = element(tolist(data.dns_a_record_set.public.addrs),count.index)
   port             = 80
@@ -126,4 +126,53 @@ resource "aws_lb_listener_rule" "public" {
       values =["${var.env}.cloudev7.online"]
     }
   }
+}
+
+resource "aws_iam_role" "role" {
+  name = "${local.names}-role"
+
+  assume_role_policy = jsonencode({
+    Version   = "2012-10-17"
+    Statement = [
+      {
+        Action    = "sts:AssumeRole"
+        Effect    = "Allow"
+        Sid       = ""
+        Principal = {
+          Service = "ec2.amazonaws.com"
+        }
+      },
+    ]
+  })
+  tags = merge(local.tags, { Name = "${local.names}-policy" })
+}
+
+
+resource "aws_iam_policy" "main" {
+  name        = "${local.names}-policy"
+  path        = "/"
+  description = "${local.names}-policy"
+
+  policy = jsonencode({
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Sid": "VisualEditor0",
+        "Effect": "Allow",
+        "Action": [
+          "ssm:GetParameterHistory",
+          "ssm:GetParametersByPath",
+          "ssm:GetParameters",
+          "ssm:GetParameter"
+        ],
+        "Resource": "arn:aws:ssm:us-east-1:120752001195:parameter/docdb.${var.env}*"
+      },
+      {
+        "Sid": "VisualEditor1",
+        "Effect": "Allow",
+        "Action": "ssm:DescribeParameters",
+        "Resource": "*"
+      }
+    ]
+  })
 }
