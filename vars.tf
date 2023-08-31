@@ -21,3 +21,4 @@ variable "port" {}
 variable "dns_public_name" {}
 variable "default_vpc" {}
 variable "public_listner" {}
+variable "parameters" {}

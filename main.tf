@@ -169,7 +169,7 @@ resource "aws_iam_policy" "main" {
           "ssm:GetParameters",
           "ssm:GetParameter"
         ],
-        "Resource": "arn:aws:ssm:us-east-1:120752001195:parameter/db.${var.env}*"
+        "Resource": local.parameters_eff
       },
       {
         "Sid": "VisualEditor1",
