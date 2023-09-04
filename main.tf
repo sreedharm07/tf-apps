@@ -23,7 +23,7 @@ resource "aws_security_group" "main" {
     from_port   = 9100
     to_port     = 9100
     protocol    = "tcp"
-    cidr_blocks = var.sg-prometheus-cidr
+    cidr_blocks = [ var.sg-prometheus-cidr ]
   }
   egress {
     from_port        = 0
