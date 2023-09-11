@@ -96,7 +96,7 @@ resource "aws_route53_record" "main" {
 }
 
 resource "aws_lb_target_group" "main" {
-  name     = "${local.names}-tg"
+  name     = "${local.names}-private-tg"
   port     = var.port
   protocol = "HTTP"
   vpc_id   = var.vpc_id
@@ -126,6 +126,12 @@ resource "aws_lb_target_group" "public" {
   protocol = "HTTP"
   vpc_id   = var.default_vpc
   tags = merge(local.tags, { Name = "${local.names}-tg" })
+#  health_check {
+#    enabled = true
+#    healthy_threshold = 2
+#    interval = 5
+#    matcher = ""
+  }
 }
 
 resource "aws_lb_target_group_attachment" "public" {
