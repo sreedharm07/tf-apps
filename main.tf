@@ -100,6 +100,7 @@ resource "aws_lb_target_group" "main" {
   port     = var.port
   protocol = "HTTP"
   vpc_id   = var.vpc_id
+
   health_check {
     enabled             = true
     healthy_threshold   = 2
