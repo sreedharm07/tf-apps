@@ -134,6 +134,7 @@ resource "aws_lb_target_group" "public" {
     path                = "/"
     port                = "80"
     unhealthy_threshold = 3
+    timeout = 2
   }
 }
 
