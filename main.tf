@@ -106,7 +106,7 @@ resource "aws_lb_target_group" "main" {
     interval            = 5
     matcher             = "200"
     path                = "/health"
-    port                = var.port
+#    port                = var.port
     unhealthy_threshold = 3
     timeout = 2
   }
@@ -142,7 +142,7 @@ resource "aws_lb_target_group" "public" {
     interval            = 5
     matcher             = "404"
     path                = "/"
-    port                = var.port
+#    port                = var.port
     unhealthy_threshold = 3
     timeout = 2
   }
