@@ -11,6 +11,7 @@ resource "aws_security_group" "main" {
     protocol    = "tcp"
     cidr_blocks = [var.sg-ssh-ingress-cidr]
   }
+
   ingress {
     description = "app"
     from_port   = var.port
