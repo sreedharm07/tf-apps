@@ -100,6 +100,16 @@ resource "aws_lb_target_group" "main" {
   port     = var.port
   protocol = "HTTP"
   vpc_id   = var.vpc_id
+  health_check {
+    enabled             = true
+    healthy_threshold   = 2
+    interval            = 5
+    matcher             = "200"
+    path                = "/"
+    port                = "80"
+    unhealthy_threshold = 3
+    timeout = 2
+  }
 }
 
 resource "aws_lb_listener_rule" "main" {
