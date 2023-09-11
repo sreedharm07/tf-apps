@@ -126,11 +126,14 @@ resource "aws_lb_target_group" "public" {
   protocol = "HTTP"
   vpc_id   = var.default_vpc
   tags = merge(local.tags, { Name = "${local.names}-tg" })
-#  health_check {
-#    enabled = true
-#    healthy_threshold = 2
-#    interval = 5
-#    matcher = ""
+  health_check {
+    enabled = true
+    healthy_threshold = 2
+    interval = 5
+    matcher = "404"
+    path = "/"
+    port = "80"
+    unhealthy_threshold = 3
   }
 
 resource "aws_lb_target_group_attachment" "public" {
