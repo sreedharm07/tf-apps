@@ -132,7 +132,6 @@ resource "aws_lb_target_group" "public" {
 #    interval = 5
 #    matcher = ""
   }
-}
 
 resource "aws_lb_target_group_attachment" "public" {
 #  count             = var.components == "frontend" ? length(tolist(data.dns_a_record_set.public.addrs)) : 0
