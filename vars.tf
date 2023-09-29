@@ -23,3 +23,4 @@ variable "default_vpc" {}
 variable "public_listner" {}
 variable "parameters" {}
 variable "sg-prometheus-cidr" {}
+variable "kms_key_id" {}
