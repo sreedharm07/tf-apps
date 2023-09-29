@@ -123,7 +123,7 @@ resource "aws_lb_listener_rule" "main" {
   }
   condition {
     host_header {
-      values =[var.components == "frontend" ? "${var.env}.cloudev7.online": "${var.components}-${var.env}.cloudev7.online" ]
+      values =[var.components == "frontend" ? "${var.env == "prod" ? "www" : var.env}.cloudev7.online": "${var.components}-${var.env}.cloudev7.online" ]
     }
   }
 }
@@ -169,7 +169,7 @@ resource "aws_lb_listener_rule" "public" {
 
   condition {
     host_header{
-      values =["${var.env}.cloudev7.online"]
+      values =["${var.env == "prod" ? "www" : var.env}.cloudev7.online"]
     }
   }
 }
