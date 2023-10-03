@@ -88,6 +88,19 @@ resource "aws_autoscaling_group" "main" {
   }
 }
 
+resource "aws_autoscaling_policy" "cpu" {
+  name                      = "auto_scale for cpu util"
+  policy_type               = "TargetTrackingScaling"
+  autoscaling_group_name    = aws_autoscaling_group.main.name
+  estimated_instance_warmup = 120
+  target_tracking_configuration {
+    predefined_metric_specification {
+      predefined_metric_type = "ASGAverageCPUUtilization"
+    }
+    target_value = 30.0
+  }
+}
+
 resource "aws_route53_record" "main" {
   zone_id = "Z09444252M01QG3Q8GZAK"
   name    = var.components == "frontend" ? var.env == "prod" ? "www" : var.env : "${var.components}-${var.env}"
