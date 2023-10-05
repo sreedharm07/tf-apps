@@ -247,4 +247,3 @@ resource "aws_iam_instance_profile" "main" {
   name = "${local.names}-role"
   role = aws_iam_role.main.name
 }
-##
