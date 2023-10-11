@@ -102,7 +102,7 @@ resource "aws_autoscaling_policy" "cpu" {
 }
 
 resource "aws_route53_record" "main" {
-  zone_id = "Z09444252M01QG3Q8GZAK"
+  zone_id = "Z095302111PIPZG18KPW0"
   name    = var.components == "frontend" ? var.env == "prod" ? "www" : var.env : "${var.components}-${var.env}"
   type    = "CNAME"
   ttl     = 30
